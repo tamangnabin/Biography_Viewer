@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
     var g_player:[Player_class] = []
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,6 +69,9 @@ class ViewController: UIViewController {
         g_player.append(Rooney)
         
     }
+    
+    //This array sets the bool value for check mark for array elements size equal to the size of g_players
+    var player_fav = Array(repeating: false, count: 22)//here 22 is size of g_players
 
     
 }
@@ -85,8 +89,46 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource{
         cell.playerImage.image = g_player[indexPath.row].image
         cell.playerName.text = self.g_player[indexPath.row].player_name
         cell.playerTeam.text = self.g_player[indexPath.row].player_team
+        
+        //For creating the check mark
+        if player_fav[indexPath.row] {
+            cell.accessoryType = .checkmark
+        }
+        else{
+            cell.accessoryType = .none
+        }
         return cell;
     }
+    
 
-
+       override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let destinationController = segue.destination as! PlayerViewController
+                destinationController.player_bio = g_player[indexPath.row].player_bio!
+                destinationController.playerImage = g_player[indexPath.row].player_name!
+            }
+        
+       }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let favAction = UIContextualAction(style: .normal,title: "Favourite", handler: {
+            (action:UIContextualAction!,view,nil) -> Void in
+            let cell = tableView.cellForRow(at: indexPath)
+            cell?.accessoryType = .checkmark
+            self.player_fav[indexPath.row] = true
+        })
+        
+        let unfavAction = UIContextualAction(style: .normal,title: "Unfavourite", handler: {
+            (action:UIContextualAction!,view,nil) -> Void in
+            let cell = tableView.cellForRow(at: indexPath)
+            cell?.accessoryType = .none
+            self.player_fav[indexPath.row] = false
+        })
+        favAction.backgroundColor = UIColor(displayP3Red: 48.0/255.0, green: 173.0/255.0, blue: 99.0/255.0, alpha: 1.0)
+        return UISwipeActionsConfiguration(actions: [unfavAction, favAction])
+    }
+    
+    
+        
 }
+

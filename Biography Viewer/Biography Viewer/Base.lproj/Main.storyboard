@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gId-BC-ANu">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Player Catalog-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Biography_Viewer" customModuleProvider="target" sceneMemberID="viewController">
@@ -20,8 +20,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="10" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KMV-fI-Mh5">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="10" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KMV-fI-Mh5" customClass="View">
+                                        <rect key="frame" x="0.0" y="-88" width="414" height="896"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="124" id="xXn-Q5-Lwh" customClass="TableViewCell" customModule="Biography_Viewer" customModuleProvider="target">
@@ -61,6 +61,7 @@
                                                     <outlet property="playerImage" destination="uz6-3h-jCt" id="0oZ-cr-M1M"/>
                                                     <outlet property="playerName" destination="Crd-7u-jPi" id="moU-3g-lss"/>
                                                     <outlet property="playerTeam" destination="DJx-Ke-J3M" id="g8F-zQ-Z6d"/>
+                                                    <segue destination="JEP-1h-OQm" kind="show" id="kGo-S7-ap0"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -83,11 +84,73 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Player Catalog" id="YLO-uV-xlD"/>
                     <connections>
                         <outlet property="tableView" destination="KMV-fI-Mh5" id="Lfu-Ts-qtw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="939.13043478260875" y="73.660714285714278"/>
+        </scene>
+        <!--Player View Controller-->
+        <scene sceneID="VgM-79-kSK">
+            <objects>
+                <viewController id="JEP-1h-OQm" customClass="PlayerViewController" customModule="Biography_Viewer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="J2l-lT-fqs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V8e-Ja-h7o">
+                                <rect key="frame" x="0.0" y="88" width="414" height="628"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMt-qe-kzs">
+                                <rect key="frame" x="20" y="735" width="372" height="93"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="94" id="wSZ-Ca-pEu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ux2-2k-Z9Y"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="V8e-Ja-h7o" firstAttribute="centerX" secondItem="J2l-lT-fqs" secondAttribute="centerX" id="IWa-vx-Oy4"/>
+                            <constraint firstItem="yMt-qe-kzs" firstAttribute="leading" secondItem="ux2-2k-Z9Y" secondAttribute="leading" constant="73" id="MWV-Z9-VP7"/>
+                            <constraint firstItem="ux2-2k-Z9Y" firstAttribute="bottom" secondItem="yMt-qe-kzs" secondAttribute="bottom" constant="33" id="RcS-9n-zws"/>
+                            <constraint firstItem="yMt-qe-kzs" firstAttribute="top" secondItem="V8e-Ja-h7o" secondAttribute="bottom" constant="19" id="WWt-EL-PwV"/>
+                            <constraint firstItem="ux2-2k-Z9Y" firstAttribute="trailing" secondItem="yMt-qe-kzs" secondAttribute="trailing" constant="114" id="cQe-7g-3b7"/>
+                            <constraint firstItem="V8e-Ja-h7o" firstAttribute="top" secondItem="ux2-2k-Z9Y" secondAttribute="top" id="dws-7Z-6Qd"/>
+                            <constraint firstItem="V8e-Ja-h7o" firstAttribute="leading" secondItem="ux2-2k-Z9Y" secondAttribute="leading" id="v8c-UC-Qa0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="B5t-eQ-r1u"/>
+                    <connections>
+                        <outlet property="PlayerImageView" destination="V8e-Ja-h7o" id="pR5-fd-vW8"/>
+                        <outlet property="Player_Bio" destination="yMt-qe-kzs" id="pqy-pO-0J8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YKc-Z6-fyg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-813.04347826086962" y="79.6875"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="p09-c0-p5d">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gId-BC-ANu" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FM6-2V-hh5">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="DsG-Xm-CY9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mgF-kg-qHh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="28.985507246376812" y="73.660714285714278"/>
         </scene>
